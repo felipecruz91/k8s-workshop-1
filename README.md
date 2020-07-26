@@ -1,6 +1,18 @@
 # k8s-workshop-1
 
-This project is a Spring Boot application using a single `Dockerfile`.
+In this exercise you will be putting into practice numerous concepts that will cover:
+
+- Building a Java app in Docker and push the image to the internal Microk8s `registry`.
+- Creating a `namespace`.
+- Assigning a `ResourceQuota` to a `namespace`.
+- Creating a `Deployment` of multiple replicas.
+- Setting resource `requests` to Pods.
+- Creating a `ConfigMap` and mount it into a container as an `env` variable.
+Creating a `Secret` and mount it into a container as an `env` variable.
+- Communicate pods from different namespaces.
+
+
+![Overview](./docs/imgs/Overview.PNG)
 
 ## Building the app with Docker
 
@@ -9,6 +21,9 @@ $ docker build -t webapp .
 ```
 
 ## Pushing the Docker image to the internal Microk8s registry
+
+Make sure you have the Microk8s registry running: `microk8s.enable registry`.
+
 ```cli
 $ docker tag webapp localhost:32000/webapp
 $ docker push localhost:32000/webapp
