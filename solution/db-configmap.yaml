@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  DB_USERNAME: John
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: db-configmap

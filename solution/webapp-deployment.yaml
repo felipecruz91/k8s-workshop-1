@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: webapp-deployment
+  name: webapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: webapp-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: webapp-deployment
+    spec:
+      containers:
+      - image: localhost:32000/webapp
+        name: webapp-deployment
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        envFrom:
+          - configMapRef:
+              name: db-configmap
+          - secretRef:
+              name: db-password-secret
+status: {}
