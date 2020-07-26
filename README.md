@@ -17,6 +17,8 @@ Creating a `Secret` and mount it into a container as an `env` variable.
 ## Building the app with Docker
 
 ```cli
+$ git clone https://github.com/felipecruz91/k8s-workshop-1.git
+$ cd k8s-workshop-1
 $ docker build -t webapp .
 ```
 
