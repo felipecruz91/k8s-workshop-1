@@ -143,16 +143,20 @@ Create the ConfigMap in the `workshop1` namespace:
 $ kubectl apply -f db-configmap.yaml -n workshop1
 ```
 
-Mount it within the container:
+Update the `webapp-deployment.yaml` file to mount the ConfigMap `db-configmap` as an environment variable in the container:
 
 ```yaml
 envFrom:
-    - configMapRef:
-        name: db-configmap
+- configMapRef:
+    name: db-configmap
 ```
 
-Verify it has been mounted correctly:
+Update the deployment:
 
+```cli
+$ kubectl apply -f webapp-deployment.yaml -n workshop1
+deployment.apps/webapp-deployment configured
+Verify it has been mounted correctly:
 ```cli
 
 $ kubectl get pods -n workshop1
@@ -183,7 +187,7 @@ $ kubectl apply -f db-password-secret.yaml -n workshop1
 secret/db-password-secret created
 ```
 
-Mount it as an environment variable in the container by adding the `secretRef` to the existing `envFrom` section.
+Update the `webapp-deployment.yaml` file to mount the Secret `db-password-secret` as an environment variable in the container. You can do it by adding the `secretRef` to the existing `envFrom` section.
 
 ```yaml
 envFrom:
@@ -205,7 +209,7 @@ Verify the secret has been mounted successfully:
 $ curl localhost:30000
 Handling request from pod webapp-deployment-59f5cdbfcc-5ltnw. DB_USERNAME: John DB_PASSWORD: 777
 ```
-## Run a temp pod
+## Run a temp pod in the `default` namespace
 
 Run a temp pod in the `default` namespace that reaches the pods of the deployment that live in the `workshop1` namespace internally through the service.
 
