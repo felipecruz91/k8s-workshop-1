@@ -9,7 +9,6 @@ In this exercise you will be putting into practice numerous concepts that will c
 - Setting resource `requests` to Pods.
 - Creating a `ConfigMap` and mount it into a container as an `env` variable.
 Creating a `Secret` and mount it into a container as an `env` variable.
-- Communicate pods from different namespaces.
 
 
 ![Overview](./docs/imgs/Overview.PNG)
@@ -208,26 +207,6 @@ Verify the secret has been mounted successfully:
 ```cli
 $ curl localhost:30000
 Handling request from pod webapp-deployment-59f5cdbfcc-5ltnw. DB_USERNAME: John DB_PASSWORD: 777
-```
-## Run a temp pod in the `default` namespace
-
-Run a temp pod in the `default` namespace that reaches the pods of the deployment that live in the `workshop1` namespace internally through the service.
-
-```cli
-$ kubectl run tmp-pod \
-    --image=curlimages/curl \
-    --restart=Never \
-    --rm \
-    -it \
-    -- /bin/sh -c "while true; do curl http://webapp-svc.workshop1.svc.cluster.local:8080; sleep 1; done;"
-
-If you don't see a command prompt, try pressing enter.
-Handling request from pod webapp-deployment-59f5cdbfcc-gtprk. DB_USERNAME: John DB_PASSWORD: 777
-Handling request from pod webapp-deployment-59f5cdbfcc-5ltnw. DB_USERNAME: John DB_PASSWORD: 777
-Handling request from pod webapp-deployment-59f5cdbfcc-5ltnw. DB_USERNAME: John DB_PASSWORD: 777
-Handling request from pod webapp-deployment-59f5cdbfcc-gtprk. DB_USERNAME: John DB_PASSWORD: 777
-Handling request from pod webapp-deployment-59f5cdbfcc-5ltnw. DB_USERNAME: John DB_PASSWORD: 777
-Handling request from pod webapp-deployment-59f5cdbfcc-xfbjc. DB_USERNAME: John DB_PASSWORD: 777
 ```
 
 ## Clean up
